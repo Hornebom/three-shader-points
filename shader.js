@@ -1,8 +1,10 @@
 const vertexShader = `
+  attribute float y_Position;
+
   void main() {
     vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
     gl_PointSize = 10.0;
-    gl_Position = projectionMatrix * mvPosition;
+    gl_Position = projectionMatrix * mvPosition + vec4(1.0, y_Position, 1.0, 1.0);
   }
 `
 

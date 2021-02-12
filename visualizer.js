@@ -1,11 +1,9 @@
 import { 
   Points,
-  BufferGeometry,
-  Float32BufferAttribute,
-  MathUtils,
-  // PointsMaterial,
   Color,
-  ShaderMaterial
+  ShaderMaterial,
+  BufferAttribute,
+  PlaneGeometry
 } from 'three'
 import { vertexShader, fragmentShader } from './shader'
 
@@ -13,39 +11,42 @@ class Visualizer extends Points {
   constructor() {
     super()
 
-    this.initGeometry()
-    this.initMaterial()
+    this.geometry = new PlaneGeometry(10, 10, 10, 10)
+    this.createMaterial()
+    this.createAttributes()
 
-    this.uniforms
+    this.vertexCount
+    this.yPosition
   }
 
-  initGeometry() {
-    const vertices = []
-    const spread = 5
-    for (let i = 0; i < 10; i ++) {
-      const x = MathUtils.randFloatSpread(spread)
-      const y = MathUtils.randFloatSpread(spread)
-      const z = MathUtils.randFloatSpread(spread)
-
-      vertices.push(x, y, z)
-    }
-
-    this.geometry = new BufferGeometry()
-    this.geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3))
-  }
-
-  initMaterial() {
-    this.uniforms = {
+  createMaterial() {
+    const uniforms = {
       color: { value: new Color( 0xffff00 ) },
     };
 
     this.material = new ShaderMaterial( {
-      uniforms: this.uniforms,
+      uniforms,
       vertexShader,
       fragmentShader,
       transparent:  true
 
     });
+  }
+
+  createAttributes() {
+    this.vertexCount = this.geometry.attributes.position.count
+    this.yPosition = new Float32Array( this.vertexCount * 1 ).fill(0) // 1 values per vertex
+
+    this.geometry.setAttribute( 'y_Position', new BufferAttribute( this.yPosition, 1 ) )
+  }
+
+  updatePosition(offsetArray) {
+    const position = this.geometry.attributes['y_Position']
+    offsetArray.forEach((point, index) => {
+      position.array[index] = point
+    })
+
+    position.needsUpdate = true
   }
 }
 

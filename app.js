@@ -12,6 +12,8 @@ export function app() {
   window.addEventListener("resize", resizeHandler)
 
   const visualizer = new Visualizer()
+  // plane is vertical by default > rotate by 90deg
+  visualizer.rotateX(Math.PI * .5)
   scene.add(visualizer)
 
   camera.position.z = 10
@@ -24,6 +26,13 @@ export function app() {
   }
 
   function animate() {
+    if(visualizer) {
+      const { yPosition } = visualizer
+      // 'newPosition' could be the audio values
+      const newPosition = yPosition.map(() => Math.random())
+      visualizer.updatePosition(newPosition)
+    }
+
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
   }
