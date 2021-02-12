@@ -15,9 +15,9 @@ Your app is ready to be deployed!
 
 **For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
 
-### Ressources
-## Points Material
+## Ressources
+### Points Material
 https://threejs.org/docs/#api/en/materials/PointsMaterial
 
-## Three.js points mesh + ShaderMaterial
+### Three.js points mesh + ShaderMaterial
 http://bl.ocks.org/duhaime/822f81a578b47d6fd0be523e6f7efc78
