@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "snowpack dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "snowpack": "^3.0.11"
+  },
+  "dependencies": {
+    "three": "^0.125.2"
+  }
+}
